@@ -77,7 +77,7 @@ struct MainScreen: View {
     @State var studentName = ""
     @State var studentAverage: Double = 0.0
     @State var newname = ""
-    @State var newgrade = "0"
+    @State var newgrade = ""
     @State var noten = [0, 0, 0, 0, 0]
     
     
@@ -92,6 +92,10 @@ struct MainScreen: View {
     
     func removeStudents(at offsets: IndexSet) {
         vm.filteredArray.remove(atOffsets: offsets)
+    }
+    
+    func addgrade() {
+        self.noten.append(Int(self.newgrade)!)
     }
     
     var body: some View {
@@ -126,10 +130,6 @@ struct MainScreen: View {
                                 studentAverage = Double(newaverage)
                                 toggling1()
                         })
-                        
-                        Spacer()
-                        
-                        Text("Moin")
                     }
                     
                 }
@@ -215,11 +215,7 @@ struct MainScreen: View {
             .textFieldStyle(.roundedBorder)
             
             Button(action: {
-                print(newgrade)
-                for newgrades in vm.filteredArray {
-                    newgrades.grades.append(Int(newgrade)!)
-                    print(newgrades.grades)
-                }
+                self.addgrade()
             }, label: {
                 Text("New grade")
                     .fontWeight(.bold)
