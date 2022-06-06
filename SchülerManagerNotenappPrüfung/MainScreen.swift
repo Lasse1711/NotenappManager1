@@ -98,6 +98,24 @@ struct MainScreen: View {
         self.noten.append(Int(self.newgrade)!)
     }
     
+    
+    func makenewaverage() {
+        var gesamt = 0
+        for quersumme in noten {
+            gesamt += Int(quersumme)
+        }
+        var newaverage2: Double = 0.0
+        
+        if(noten.count == 0) {
+            print("Failed2")
+        } else {
+            newaverage2 = Double(gesamt / noten.count)
+        }
+        
+        studentAverage = newaverage2
+        //print(newaverage2)
+    }
+    
     var body: some View {
         VStack {
             Text("Schüler")
@@ -216,6 +234,7 @@ struct MainScreen: View {
             
             Button(action: {
                 self.addgrade()
+                makenewaverage()
             }, label: {
                 Text("New grade")
                     .fontWeight(.bold)
